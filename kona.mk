@@ -546,6 +546,10 @@ PRODUCT_SOONG_NAMESPACES += \
     hardware/xiaomi \
     vendor/qcom/opensource/usb/etc
 
+# Smart IDLE Maintaince
+PRODUCT_SYSTEM_PROPERTIES += \
+    persist.device_config.storage_native_boot.smart_idle_maint_period=10
+
 # Telephony
 PRODUCT_PACKAGES += \
     ims-ext-common \
