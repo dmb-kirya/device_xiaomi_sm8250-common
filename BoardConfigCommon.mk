@@ -14,6 +14,9 @@ BOARD_MOVE_RECOVERY_RESOURCES_TO_VENDOR_BOOT := true
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 AB_OTA_UPDATER := true
 
+# A/B ART
+BOARD_USES_SYSTEM_OTHER_ODEX := true
+
 AB_OTA_PARTITIONS += \
     boot \
     dtbo \
@@ -88,6 +91,7 @@ TARGET_USES_ION := true
 ifeq ($(TARGET_HAS_UDFPS),true)
 TARGET_USES_FOD_ZPOS := true
 endif
+TARGET_USES_VULKAN := true
 
 # Filesystem
 TARGET_FS_CONFIG_GEN := $(COMMON_PATH)/config.fs
@@ -112,6 +116,7 @@ BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.console=ttyMSM0 androidboot.memcg=1 msm_rtb.filter=0x237 service_locator.enable=1 androidboot.usbcontroller=a600000.dwc3 swiotlb=2048 loop.max_part=7 cgroup.memory=nokmem,nosocket reboot=panic_warm
 BOARD_KERNEL_CMDLINE += androidboot.fstab_suffix=qcom
 BOARD_KERNEL_CMDLINE += androidboot.init_fatal_reboot_target=recovery
+#BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_SEPARATED_DTBO := true
@@ -244,7 +249,8 @@ endif
 # VINTF
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
     $(COMMON_PATH)/framework_compatibility_matrix.xml \
-    $(COMMON_PATH)/device_framework_matrix.xml
+    vendor/bootleggers/config/device_framework_matrix.xml
+
 DEVICE_MANIFEST_FILE += $(COMMON_PATH)/manifest.xml
 DEVICE_MATRIX_FILE += $(COMMON_PATH)/compatibility_matrix.xml
 ODM_MANIFEST_SKUS += nfc
